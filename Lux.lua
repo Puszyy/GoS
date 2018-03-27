@@ -11,9 +11,9 @@ menu = MenuConfig("LUX", "Illuminati Lux by Puszyy")
 				menu.combo:Boolean("useE", "Use E", true)
 				menu.combo:Boolean("useR", "Use R (KillSteal)", true)
         menu:SubMenu("pred", "Prediction")
-                menu.pred:Slider("predQ", "Q Hitchance",61,0,100,1)
-                menu.pred:Slider("predE", "E Hitchance",61,0,100,1)
-                menu.pred:Slider("predR", "R Hitchance",61,0,100,1)
+                menu.pred:Slider("predQ", "Q Hitchance",50,0,100,1)
+                menu.pred:Slider("predE", "E Hitchance",50,0,100,1)
+                menu.pred:Slider("predR", "R Hitchance",50,0,100,1)
 
 local qHitchance =  menu.pred.predQ:Value() * 0.01
 local eHitchance =  menu.pred.predE:Value() * 0.01
@@ -24,12 +24,12 @@ local E = {range = 1100, delay = 0.25, speed = 1300, radius = 345, width = 345}
 local R = {speed = math.huge, delay = 1, range = 3340, width = 250}
 
 OnTick(function(myHero)
+		KillSteal()
         qHitchance =  menu.pred.predQ:Value() * 0.01
         eHitchance =  menu.pred.predE:Value() * 0.01
         rHitchance =  menu.pred.predR:Value() * 0.01
 		Combo()
 		detE()
-		KillSteal()
 end)
 
 OnCreateObj(function(Object)
@@ -46,12 +46,11 @@ end)
 
 OnDraw(function(myHero)
 		DrawCircle(GetOrigin(myHero),1300,2,100,0xffff0000)
-		--[[for _,luxE in pairs(Kugel) do
+		for _,luxE in pairs(Kugel) do
 		local drawPos = WorldToScreen(1,GetOrigin(myHero))
-			DrawText(GetDistance(GetOrigin(luxE), target),drawPos.x, drawPos.y, 80, 0xffff0000)
 			local c = GetOrigin(luxE)
-			DrawCircle(c.x,100,c.z, 345,0,0,0xffff0000)
-		end]]-- E object to target distance
+			DrawCircle(c.x,100,c.z, 345,2,0,0xffff0000)
+		end
 end)
 function useQ(target)
 local specQ = GetPrediction(target, Q)
@@ -103,12 +102,18 @@ end
 
 function KillSteal()
 for i,enemy in pairs(GetEnemyHeroes()) do
-	if menu.combo.useR:Value() and CanUseSpell(myHero,_R) == READY and ValidTarget(enemy, 3210) then
-		dmgR = CalcDamage(myHero, enemy, ((100*GetCastLevel(myHero,_R))+200) + (0.75*GetBonusAP(myHero)),0)
-			if GetCurrentHP(enemy)+GetMagicShield(enemy)+GetHPRegen(enemy)*2 < dmgR then
+	if menu.combo.useR:Value() and CanUseSpell(myHero,_R) == READY and ValidTarget(enemy, 3210) and GotBuff(enemy, "LuxIlluminatingFraulein") > 0 then
+		local dmgRP = CalcDamage(myHero, enemy, (((100*GetCastLevel(myHero,_R))+200) + (0.75*GetBonusAP(myHero)))+(10*(GetLevel(myHero)+10)+(0.20*(GetBonusAP(myHero)))),0)
+			if GetCurrentHP(enemy)+GetMagicShield(enemy)+GetHPRegen(enemy)*2 < dmgRP then
 				useR(enemy)
 			end
 	end
+	if menu.combo.useR:Value() and CanUseSpell(myHero,_R) == READY and ValidTarget(enemy, 3210) then
+		local dmgR = CalcDamage(myHero, enemy, ((100*GetCastLevel(myHero,_R))+200) + (0.75*GetBonusAP(myHero)),0)
+			if GetCurrentHP(enemy)+GetMagicShield(enemy)+GetHPRegen(enemy)*2 < dmgR then
+				useR(enemy)
+			end
+end
 end
 end
 
