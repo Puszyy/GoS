@@ -11,16 +11,16 @@ menu = MenuConfig("LUX", "Illuminati Lux by Puszyy")
 				menu.combo:Boolean("useE", "Use E", true)
 				menu.combo:Boolean("useR", "Use R (KillSteal)", true)
         menu:SubMenu("pred", "Prediction")
-                menu.pred:Slider("predQ", "Q Hitchance",50,0,100,1)
-                menu.pred:Slider("predE", "E Hitchance",50,0,100,1)
-                menu.pred:Slider("predR", "R Hitchance",50,0,100,1)
+                menu.pred:Slider("predQ", "Q Hitchance",90,0,100,1)
+                menu.pred:Slider("predE", "E Hitchance",90,0,100,1)
+                menu.pred:Slider("predR", "R Hitchance",45,0,100,1)
 
 local qHitchance =  menu.pred.predQ:Value() * 0.01
 local eHitchance =  menu.pred.predE:Value() * 0.01
 local rHitchance =  menu.pred.predR:Value() * 0.01
 
-local Q = {delay = 0.25, speed = 1200, width = 130, range = 1300}
-local E = {range = 1100, delay = 0.25, speed = 1300, radius = 345, width = 345}
+local Q = {delay = 0.25, speed = 1200, width = 70, range = 1300}
+local E = {range = 1100, delay = 0.25, speed = 1300, radius = 330}
 local R = {speed = math.huge, delay = 1, range = 3340, width = 250}
 
 OnTick(function(myHero)
