@@ -119,5 +119,5 @@ end
 
 PrintChat("<font color='#FF0000'>Illuminati Lux - <font color='#00FF00'>Loaded.")
 PrintChat("<font color='#FF0000'>by <font color='#FF0000'>Pu<font color='#FFFF00'>sz<font color='#0000FF'>yy")
-PrintChat("<font color='#FF00FF'>BETA Ver. 0.1")
+PrintChat("<font color='#FF00FF'>BETA Ver. 0.2")
 PrintChat("<font color='#FF0000'>This script is WIP and runs only basic combo for now!")
