@@ -1,4 +1,5 @@
-﻿
+﻿local myHero = GetMyHero()
+if GetObjectName(myHero) ~= "Irelia" then return end
 require('Inspired')
 local mainMenu = Menu("Quick Irelia by Puszyy")
 -- Combo
@@ -323,4 +324,4 @@ end)
 
 PrintChat("<font color='#FF0000'>Quick Irelia - <font color='#00FF00'>Loaded.")
 PrintChat("<font color='#FF0000'>by <font color='#FF0000'>Pu<font color='#FFFF00'>sz<font color='#0000FF'>yy")
-PrintChat("<font color='#FF00FF'>Ver. 0.1")
+PrintChat("<font color='#FF00FF'>Ver. 0.1 (For Request ^_^ )")
