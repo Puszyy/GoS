@@ -4,6 +4,7 @@ require('Inspired')
 local mainMenu = Menu("Quick Irelia by Puszyy")
 -- Combo
 mainMenu:Menu("Combo", "Combo")
+mainMenu.Combo:Boolean("useQ", "Use Q If Marked(Q reset)", true)
 mainMenu.Combo:Boolean("useR", "Use R on X enemies", true)
 mainMenu.Combo:Key("fkey", "Press Key to Ult on target:", string.byte("U"))
 -- R Configuration
@@ -84,6 +85,7 @@ end)
 
 OnTick(function(myHero)
 target = GetCurrentTarget() 
+Combo()
 KillSteal()
 LaneClear()
 Farm()
@@ -100,13 +102,18 @@ end
 
 function Combo()
 if Mode() == "Combo" then
+if mainMenu.Combo.useQ:Value() then
+if GotBuff(target, "ireliamark") > 0 and CanUseSpell(myHero, _Q) and ValidTarget(target, 625) then
+useQ(target)
+end
+end
+end
 if mainMenu.Combo.useR:Value() then
 if CanUseSpell(myHero,_R) == READY then
 if ValidTarget(target, 975) then
 if 100*GetCurrentHP(target)/GetMaxHP(target) < mainMenu.Rconfig.HP:Value() then
 if EnemiesAround(myHero, 975) >= mainMenu.Rconfig.X:Value() then
 useR(target)
-end
 end
 end
 end
@@ -324,4 +331,4 @@ end)
 
 PrintChat("<font color='#FF0000'>Quick Irelia - <font color='#00FF00'>Loaded.")
 PrintChat("<font color='#FF0000'>by <font color='#FF0000'>Pu<font color='#FFFF00'>sz<font color='#0000FF'>yy")
-PrintChat("<font color='#FF00FF'>Ver. 0.1 (For Request ^_^ )")
+PrintChat("<font color='#FF00FF'>Ver. 0.2")
