@@ -443,7 +443,7 @@ end
 end
 end
 if mainMenu.KillSteal.useW:Value() and CanUseSpell(myHero, _W) and ValidTarget(target, 650) then
-local wDMG = (40*GetCastLevel(myHero, _W)-20) + (1.2*(GetBaseDamage(myHero)+GetBonusDmg(myHero))) + (0.8*GetBonusAP(myHero))
+local wDMG = CalcDamage(myHero, enemy, ((40*GetCastLevel(myHero, _W)-20) + (1.2*(GetBaseDamage(myHero)+GetBonusDmg(myHero))) + (0.8*GetBonusAP(myHero))),0)
 if GetCurrentHP(enemy)+GetHPRegen(enemy)*2 < wDMG then
 CastSkillShot(_W, GetMousePos())
 end
