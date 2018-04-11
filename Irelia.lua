@@ -253,7 +253,7 @@ CastTargetSpell(enemy, _Q)
 end
 end
 for _, minion in pairs(minionManager.objects) do
-if mainMenu.Combo.useQS:Value() and CanUseSpell(myHero, _Q) and ValidTarget(minion, 250) then
+if mainMenu.Combo.useQS:Value() and CanUseSpell(myHero, _Q) and ValidTarget(minion, 250) and EnemiesAround(myHero, 250) >= 1 then
 local qsDMG0 = ((20*GetCastLevel(myHero,_Q)-10)+(0.7*(GetBaseDamage(myHero)+GetBonusDmg(myHero))))
 local qsDMG = qsDMG0 + (qsDMG0*0.6)
 local qsDMGT = qsDMG + 2*GetBaseDamage(myHero)
@@ -593,4 +593,4 @@ end)
 
 PrintChat("<font color='#FF0000'>Quick Irelia - <font color='#00FF00'>Loaded.")
 PrintChat("<font color='#FF0000'>by <font color='#FF0000'>Pu<font color='#FFFF00'>sz<font color='#0000FF'>yy")
-PrintChat("<font color='#FF00FF'>Ver. 1.0")
+PrintChat("<font color='#FF00FF'>Ver. 1.1")
